@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phone Book</title>
+  <link rel="icon" href="./image/phonebook.png" type="image/png">
+  <link href="./style.css" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1>My Phone Book</h1>
+  </header>
+
+
+  <main id="main-section">
+    <nav class="main-nav">
+      <div class="nav-left">
+        <p id="countpersons">3 persons</p>
+        <input type="search" placeholder="search" id="liftelem" >
+      </div>
+      <div class="nav-right">
+        <ul class="navicons">
+          <li><img src="./image/addp.png" alt="add-person" class="icons"></li>
+          <li><img src="./image/remove.png" alt="remove" class="icons"></li>
+        </ul>
+      </div>
+    </nav>
+    <section class="second-div">
+      <div  class="persons">
+        <ul >
+          <li>  
+            <div class="left">
+            <img src="./image/fatema.png" alt="person" class="img-person" >
+            <h3 class="names">Fatema</h3>
+          </div>
+          <div class="right-img">
+          <img src="./image/info.png" alt="information" class="icons">
+          <img src="./image/edit.png" alt="edit" class="icons">
+          <img src="./image/remove.png " alt="remove" class="icons">
+          </div>
+        </li>
+
+        <li>
+          <div class="left">
+            <img src="./image/Ali.jpg" alt="person" class="img-person">
+            <h3 class="names">Ali</h3>
+          </div>
+          <div class="right-img">
+            <img src="./image/info.png" alt="information" class="icons">
+            <img src="./image/edit.png" alt="edit" class="icons">
+            <img src="./image/remove.png " alt="remove" class="icons">
+          </div>
+        </li>
+
+        <li>
+          <div class="left">
+            <img src="./image/nora.webp" alt="person" class="img-person">
+            <h3 class="names">Nora</h3>
+          </div>
+          <div class="right-img">
+            <img src="./image/info.png" alt="information" class="icons">
+            <img src="./image/edit.png" alt="edit" class="icons">
+            <img src="./image/remove.png " alt="remove" class="icons">
+          </div>
+        </li>
+        </ul>
+        </div>
+    </section>
+
+   
+    
+  </main>
+
+
+
+
+
+<footer>
+  <div class="container">
+    <p>&copy; Adla Najjar 2025 . All rights reserved.</p>
+  </div>
+</footer>
+
+  <!-- Modal -->
+  <div class="modal" id="personModal">
+    <div class="modal-content">
+      <span id="closeModal" class="close">&times;</span>
+      <label>Name: <br><input type="text"></label><br>
+      <label>Phone:<br><input type="tel" pattern="[0-9]{10}" ></label><br>
+      <label>Address: <br><input type="text"></label><br>
+      <label>Age:<br> <input type="number"></label><br>
+      <label>Image URL: <br><input type="text"></label><br>
+      <button id="saveperson">Save</button>
+      <button id="close">Canceal</button>
+    </div>
+  </div>
+
+<script src="./js.js"></script>
+</body>
+</html>
