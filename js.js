@@ -1,27 +1,28 @@
 "use strict";
 //!modal
 const modal = document.getElementById('personModal');
-const  closepopup=() =>{
+const  closePopUp=() =>{
  modal.style.display='none';
  document.body.style.overflow='auto';
 }
-document.getElementById('close').addEventListener('click',closepopup);
-document.getElementById('closeModal').addEventListener('click', closepopup);
+document.getElementById('close').addEventListener('click',closePopUp);
+document.getElementById('closeModal').addEventListener('click', closePopUp);
 
 
-//add persons
-let add_persons = document.querySelector('.persons');
-add_persons.className ="persons"
-let add_person = document.getElementById('add_person');
-add_person.addEventListener('click',()=>{
-  add()
-})
 
 
 //delete all persons
 let delete_all=document.getElementById('delete_all');
 delete_all.addEventListener('click',()=>{
   ul.innerHTML = "";
+})
+
+//add persons
+let add_persons = document.querySelector('.persons');
+add_persons.className = "persons"
+let add_person = document.getElementById('add_person');
+add_person.addEventListener('click', () => {
+  add()
 })
 
 //add icons
@@ -33,7 +34,7 @@ const  icons_alt =
 
 let right_img = document.createElement('div');
 right_img.className ="right_img"
-function add_icons(){
+function addIcons(){
 icons_img.forEach((elem,index) => {
   let img = document.createElement('img')
   img.src=elem.trim()
@@ -42,7 +43,7 @@ icons_img.forEach((elem,index) => {
   right_img.appendChild(img)
 })
 }
-add_icons()
+addIcons()
 
 
 //array of persons
