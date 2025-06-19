@@ -28,7 +28,6 @@
       <div class="persons" >
         <ul  class="data_of_persons">
             <!-- Persons will appear here -->
-
         </ul>
         </div>
     </section>
@@ -39,19 +38,32 @@
   </div>
 
 </footer>
-  <!-- Modal -->
+
+
+  <!-- Modal for Adding Person -->
   <div class="modal" id="personModal">
     <div class="modal-content">
-      <span id="closeModal" class="close">&times;</span>
-      <label>Name: <br><input type="text"></label><br>
-      <label>Phone:<br><input type="tel" pattern="[0-9]{10}" ></label><br>
-      <label>Address: <br><input type="text"></label><br>
-      <label>Age:<br> <input type="number"></label><br>
-      <label>Image URL: <br><input type="text"></label><br>
+      <span class="closeModal  close" >&times;</span>
+      <label>Name: <br><input type="text" id="inputName"></label><br>
+      <label>Phone:<br><input type="tel" id="inputPhone" pattern="[0-9]{10}"></label><br>
+      <label>Address: <br><input type="text" id="inputAddress"></label><br>
+      <label>Age:<br> <input type="number" id="inputAge"></label><br>
+      <label>Image URL: <br><input type="text" id="inputImage"></label><br>
       <button id="saveperson">Save</button>
-      <button id="close">Canceal</button>
+      <button class="close">Cancel</button>
     </div>
   </div>
+  
+  <!-- Modal for Viewing Person Data -->
+  <div class="modal" id="personModalData">
+    <div class="modal-content">
+      <span class="closeModal" id="closepersonModalData">&times;</span>
+      <div class="modal-content-data">
+        <!-- البيانات ستُملأ هنا عبر JavaScript -->
+      </div>
+    </div>
+  </div>
+
 
 <script src="./js.js"></script>
 </body>

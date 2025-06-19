@@ -1,15 +1,35 @@
 "use strict";
-//!modal
-const modal = document.getElementById('personModal');
-const  closePopUp=() =>{
- modal.style.display='none';
- document.body.style.overflow='auto';
+//!modals
+let personModal = document.getElementById('personModal');
+let personModalData=document.getElementById("personModalData");
+
+//Close Modals
+document.querySelectorAll('.close').forEach(elem => {
+  elem.addEventListener('click', () => {
+    personModal.style.display = 'none';
+    document.body.style.overflow = 'auto';});
+});
+
+document.getElementById('closepersonModalData').addEventListener('click', () => {
+  personModalData.style.display = 'none';
+  document.body.style.overflow = 'auto';
+});
+
+// Open Modals
+function openPersonModal() {
+  personModal.style.display = "block";
+  document.body.style.overflow = "hidden";
 }
-document.getElementById('close').addEventListener('click',closePopUp);
-document.getElementById('closeModal').addEventListener('click', closePopUp);
+
+function openPersonDataModal(contentHTML) {
+  personModalData.querySelector(".modal-content-data").innerHTML = contentHTML;
+  personModalData.style.display = "block";
+  document.body.style.overflow = "hidden";
+}
 
 
 
+let ul = document.querySelector('.data_of_persons') //persons will be appear under ul
 
 //delete all persons
 let delete_all=document.getElementById('delete_all');
@@ -27,23 +47,29 @@ add_person.addEventListener('click', () => {
 
 //add icons
 const icons_img = 
-[ "./image/info.png", "./image/edit.png", "./image/remove.png " ]
+[ "./image/info.png", "./image/edit.png", "./image/remove.png" ]
    
 const  icons_alt =
  ["information",  "edit", "remove"]
 
-let right_img = document.createElement('div');
-right_img.className ="right_img"
-function addIcons(){
-icons_img.forEach((elem,index) => {
-  let img = document.createElement('img')
-  img.src=elem.trim()
-  img.alt=icons_alt[index]
-  img.className = "icons";
-  right_img.appendChild(img)
-})
+
+function createRightIcons() {
+  const container = document.createElement('div');
+  container.className = "right_img";
+
+  icons_img.forEach((src, index) => {
+  const img = document.createElement('img');
+    img.src = src.trim();
+    img.alt = icons_alt[index];
+    img.className = "icons";
+    container.appendChild(img);
+  });
+
+  return container;
 }
-addIcons()
+
+
+
 
 
 //array of persons
@@ -68,35 +94,72 @@ const persons = [
   }
 ]
 
-let ul = document.querySelector('.data_of_persons') //persons will be appear under ul
+// div contain data for each person
+function createPersonData(person) {
+  let divleft = document.createElement('div');
+
+  let name = document.createElement('h3');
+  name.textContent = person.name.trim();
+
+  let phone = document.createElement('p');
+  phone.textContent = person.phone.trim();
+
+  let email = document.createElement('p');
+  email.textContent = person.email.trim();
+
+  divleft.appendChild(name);
+  divleft.appendChild(phone);
+  divleft.appendChild(email);
+
+  return divleft;
+}
+
+
+
+
+
 function add(){
-  ul.innerHTML = "";
+ul.innerHTML = "";
 persons.forEach(eperson=>{
-  const person = document.createElement('div')
+   const person = document.createElement('div')
   const li = document.createElement('li')
-  let name=document.createElement('h3')
-  name.textContent=eperson.name
-  let phone = document.createElement('p')
-  phone.textContent = eperson.phone
-  let email= document.createElement('p')
-  email.textContent = eperson.email
-  const divleft = document.createElement('div')
-  divleft.appendChild(name)
-  divleft.appendChild(phone)
-  divleft.appendChild(email)
   let image=document.createElement('img')
-  image.src=eperson.image
-  image.alt=eperson.name
+  image.src=eperson.image.trim()
+  image.alt=eperson.name.trim()
   image.className ="img-person"
   person.appendChild(image)
-  person.appendChild(divleft)
+  let dataDiv = createPersonData(eperson);
+  person.appendChild(dataDiv);
   person.className = "left"
   li.appendChild(person)
-  li.appendChild(right_img.cloneNode(true));
+  li.appendChild(createRightIcons());
   ul.appendChild(li)
 })
 }
 
+
+//Edit && Remove
+ul.addEventListener('click', function (e) {
+  if (e.target.tagName === 'IMG') {
+    const img = e.target;
+    const li = img.closest('li');
+    const index = Array.from(ul.children).indexOf(li); // index person that  click
+
+    if (img.alt === 'information') {
+      const person = persons[index];
+      const contentHTML = createPersonData(person).outerHTML;
+      openPersonDataModal(contentHTML);
+    }
+    else if (img.alt === 'remove') {
+      persons.splice(index, 1); 
+      add(); 
+    }
+    
+    
+
+   
+  }
+});
 
 
 
