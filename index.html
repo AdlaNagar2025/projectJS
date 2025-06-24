@@ -14,8 +14,8 @@
   <main id="main-section">
     <nav class="main-nav">
       <div class="nav-left">
-        <p id="countpersons">3 persons</p>
-        <input type="search" placeholder="search" id="liftelem" >
+        <p id="countpersons">0 people</p>
+        <input type="search" placeholder="search" id="searchpeople" >
       </div>
       <div class="nav-right">
         <ul class="navicons">
@@ -32,25 +32,31 @@
         </div>
     </section>
 </main>
+
+
 <footer>
   <div class="container">
     <p>&copy; Adla Najjar 2025 . All rights reserved.</p>
   </div>
-
 </footer>
 
 
   <!-- Modal for Adding Person -->
   <div class="modal" id="personModal">
     <div class="modal-content">
-      <span class="closeModal  close" >&times;</span>
-      <label>Name: <br><input type="text" id="inputName"></label><br>
-      <label>Phone:<br><input type="tel" id="inputPhone" pattern="[0-9]{10}"></label><br>
-      <label>Address: <br><input type="text" id="inputAddress"></label><br>
-      <label>Age:<br> <input type="number" id="inputAge"></label><br>
-      <label>Image URL: <br><input type="text" id="inputImage"></label><br>
-      <button id="saveperson">Save</button>
-      <button class="close">Cancel</button>
+      <form id="contactForm">
+      <span class="close"  id="closex">&times;</span>
+      <label>Name:</label> <input type="text" id="inputName">
+      <label>Phone:</label><input type="tel" id="inputPhone" pattern="[0-9]{10}">
+      <label>Email: </label><input type="email" id="inputEmail">
+      <label>Address:</label><input type="text" id="inputAddress">
+      <label>Age:</label> <input type="number" id="inputAge">
+      <label for="comment">Comment:</label>
+      <textarea id="comment" rows="3" ></textarea>
+      <label>Image URL: </label><input type="text" id="inputImage"><br>
+      <button type="submit" id="saveperson">Save</button>
+      <button type="button" class="close">Cancel</button>
+    </form>
     </div>
   </div>
   
@@ -59,7 +65,7 @@
     <div class="modal-content">
       <span class="closeModal" id="closepersonModalData">&times;</span>
       <div class="modal-content-data">
-        <!-- البيانات ستُملأ هنا عبر JavaScript -->
+      
       </div>
     </div>
   </div>
