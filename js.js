@@ -1,4 +1,5 @@
 "use strict";
+let editIndex = null
 //!modals
 const personModal = document.getElementById('personModal'); //form
 const personModalData=document.getElementById("personModalData"); //info
@@ -49,10 +50,10 @@ add_person.addEventListener('click', openPersonModal);
 
 //add icons
 const icons_img = 
-[ "./image/info.png", "./image/edit.png", "./image/remove.png" ]
+[ "./image/edit.png", "./image/remove.png" ]
    
 const  icons_alt =
- ["information",  "edit", "remove"]
+ [  "edit", "remove"]
 
 
 function createRightIcons() {
@@ -116,6 +117,31 @@ const persons=[
 // Add persons to array
 document.getElementById("contactForm").addEventListener("submit", function (e) {
   e.preventDefault();
+  if (editIndex !== null) {
+    //person want to do editing the new data
+    persons[editIndex] = {
+      name: document.getElementById('inputName').value.trim(),
+      phone: document.getElementById('inputPhone').value.trim(),
+      email: document.getElementById('inputEmail').value.trim(),
+      address: document.getElementById('inputAddress').value.trim(),
+      age: document.getElementById('inputAge').value.trim(),
+      comment: document.getElementById('comment').value.trim(),
+      image: document.getElementById('inputImage').value.trim()
+    };
+
+    add();
+    updatePersonCount();
+    editIndex = null;
+
+    this.reset();
+    personModal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+
+    return;
+    }
+  else {
+    
+  
   const p_name = document.getElementById('inputName').value.trim();
   const p_phone = document.getElementById('inputPhone').value.trim();
   const p_address = document.getElementById('inputAddress').value.trim();
@@ -129,6 +155,7 @@ document.getElementById("contactForm").addEventListener("submit", function (e) {
       alert("Please Enter your name and your phone")
       return;
   }
+
   else{
     const cardperson = {
       name: p_name,
@@ -141,16 +168,16 @@ document.getElementById("contactForm").addEventListener("submit", function (e) {
     }
  
     persons.push(cardperson);
+  
     add();
+    updatePersonCount();
 
     // ניקוי השדות
     this.reset();
-
     personModal.style.display = 'none';
     document.body.style.overflow = 'auto';
-    
-    updatePersonCount();
-}});
+ 
+}}});
 
 
 
@@ -212,23 +239,56 @@ persons.forEach(eperson=>{
 }
 
 
-//Edit && Remove
+//Remve && Edit && data of person  ##event delegation:##
 ul.addEventListener('click', function (e) {
+
   if (e.target.tagName === 'IMG') {
     const img = e.target;
     const li = img.closest('li');
     const index = Array.from(ul.children).indexOf(li); // index person that  click
-
-    if (img.alt === 'information') {
-      const person = persons[index];
-      const contentHTML = createPersonData(person).outerHTML;
-      openPersonDataModal(contentHTML);
-    }
-    else if (img.alt === 'remove') {
+//#Remve
+    if (img.alt === 'remove') {
       persons.splice(index, 1); 
       add(); 
       updatePersonCount();
     }
+    //#Edit
+    if (img.alt === 'edit') {
+      openPersonModal()
+      editIndex = index;//the person who want to do edit
+      const person = persons[editIndex];
+//the old data
+      document.getElementById('inputName').value = person.name;
+      document.getElementById('inputPhone').value = person.phone;
+      document.getElementById('inputAddress').value = person.address;
+      document.getElementById('inputEmail').value = person.email;
+      document.getElementById('inputAge').value = person.age;
+      document.getElementById('comment').value = person.comment;
+      document.getElementById('inputImage').value = person.image;
+    }
+  }
+  console.log(persons);
+});
+
+
+ul.addEventListener('click', function (e) {
+  if (e.target.tagName === 'LI') {
+    const currentElement = e.target;
+    const person = persons[Array.from(ul.children).indexOf(currentElement)];
+    const contentHTML = createPersonData(person).outerHTML;
+    openPersonDataModal(contentHTML);
+  }
+});
+
+ul.addEventListener('mouseover', function (e) {
+  if (e.target.tagName === 'LI') {
+    e.target.classList.add('highlight');
+  }
+});
+
+ul.addEventListener('mouseout', function (e) {
+  if (e.target.tagName === 'LI') {
+    e.target.classList.remove('highlight');
   }
 });
 
@@ -269,6 +329,10 @@ function showFilteredList(filteredPersons) {
     ul.appendChild(li);
   });
 }
+
+
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
   add();

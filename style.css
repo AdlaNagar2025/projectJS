@@ -160,6 +160,11 @@ button:hover {
 
 
 
+
+.highlight {
+  
+  background: linear-gradient(90deg, #1A4F80,#2B6CB0,#edebe6,#2B6CB0, #1A4F80);}
+
 /* Modal popup */
 .modal { 
   display: none;
